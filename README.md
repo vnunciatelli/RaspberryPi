@@ -30,3 +30,44 @@ Este tutorial descreve como configurar um sistema de **dual boot** no Raspberry 
 4. **Tornar o script executável**:
    ```bash
    sudo chmod +x /usr/local/bin/validate-boot.sh
+
+5. **Habilitar o serviço systemd**:
+   ```bash
+   sudo systemctl enable validate-boot.service
+
+6. **Iniciar o serviço**:
+   ```bash
+   sudo systemctl start validate-boot.service
+
+### 3. Verificação do Sistema de Partições
+
+Na inicialização, o serviço systemd verifica a partição Root A (p2) montando-a em /mnt.
+
+Se a partição Root A estiver corrompida ou inacessível, o sistema tentará montar a partição Root B (p3).
+
+Caso ambas as partições falhem, o sistema exibirá um erro e não fará o boot.
+
+### 4. Execução do Sistema
+
+Quando o Raspberry Pi for reiniciado, o validate-boot.service será executado para verificar as partições e garantir que o sistema inicie corretamente a partir da partição válida.
+
+graph TD
+    A[Início] --> B[Verificar Partição Root A (p2)]
+    B --> C{Partição Root A ok?}
+    C -->|Sim| D[Iniciar sistema]
+    C -->|Não| E[Fallback para Root B (p3)]
+    E --> F{Root B ok?}
+    F -->|Sim| G[Iniciar Root B]
+    F -->|Não| H[Erro, ambas falharam]
+
+    classDef start_end fill:#f9f,stroke:#333,stroke-width:2px;
+    class A,D,G,H start_end;
+
+### Resolução de Problemas
+
+Partição Root A não funcionando:
+Caso o Raspberry Pi não inicie da partição Root A, o serviço validate-boot.service tentará a partição Root B.
+
+Ambas as partições falharem:
+Se as duas partições falharem, uma mensagem de erro será exibida, indicando que não foi possível inicializar o sistema.
+
