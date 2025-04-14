@@ -61,7 +61,6 @@ graph TD
     F -->|Sim| G[Iniciar Root B]
     F -->|Não| H[Erro, ambas falharam]
 
-    classDef start_end fill:#f9f,stroke:#333,stroke-width:2px;
     class A,D,G,H start_end;
 ```
 
