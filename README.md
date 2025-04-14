@@ -53,7 +53,7 @@ Quando o Raspberry Pi for reiniciado, o validate-boot.service será executado pa
 
 ```mermaid
 graph TD
-    A[Início] --> B[Verificar Partição Root A (p2)]
+    A[Início] --> B[Verificar Partição Root X (p2)]
     B --> C{Partição Root A ok?}
     C -->|Sim| D[Iniciar sistema]
     C -->|Não| E[Fallback para Root B (p3)]
