@@ -1,0 +1,10 @@
+[Unit]
+Description=Verificação e Fallback de Boot
+
+[Service]
+ExecStart=/usr/local/bin/validate-boot.sh
+Type=oneshot
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
