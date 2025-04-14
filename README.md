@@ -72,7 +72,6 @@ Caso o Raspberry Pi não inicie da partição Root A, o serviço validate-boot.s
 Ambas as partições falharem:
 Se as duas partições falharem, uma mensagem de erro será exibida, indicando que não foi possível inicializar o sistema.
 
-# Tutorial: Configuração de Dual Boot com Fallback Automático no Raspberry Pi
 
 ## Diagrama de Fluxo Detalhado
 
