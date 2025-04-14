@@ -72,3 +72,31 @@ Caso o Raspberry Pi não inicie da partição Root A, o serviço validate-boot.s
 Ambas as partições falharem:
 Se as duas partições falharem, uma mensagem de erro será exibida, indicando que não foi possível inicializar o sistema.
 
+# Tutorial: Configuração de Dual Boot com Fallback Automático no Raspberry Pi
+
+## Diagrama de Fluxo Detalhado
+
+```mermaid
+graph TD
+    A[Início] --> B[Verificar Partição Root A partição 2]
+    B --> C{Root A Montada com Sucesso?}
+    C -->|Sim| D[Iniciar Sistema com Root A]
+    C -->|Não| E[Verificar Partição Root B partição 3]
+    E --> F{Root B Montada com Sucesso?}
+    F -->|Sim| G[Iniciar Sistema com Root B]
+    F -->|Não| H[Erro: Ambas as partições falharam]
+    
+    D --> I[Verificar se a partição Root A está funcionando]
+    I --> J{Root A OK?}
+    J -->|Sim| K[Continuar com Root A]
+    J -->|Não| L[Fallback para Root B]
+    L --> M[Verificar Root B novamente]
+    M --> N{Root B OK?}
+    N -->|Sim| G[Iniciar Sistema com Root B]
+    N -->|Não| H[Erro: Ambas as partições falharam]
+
+    class A,D,G,H start_end;
+    class C,F,J,N start_end;
+```
+
+
