@@ -51,6 +51,7 @@ Caso ambas as partições falhem, o sistema exibirá um erro e não fará o boot
 
 Quando o Raspberry Pi for reiniciado, o validate-boot.service será executado para verificar as partições e garantir que o sistema inicie corretamente a partir da partição válida.
 
+```mermaid
 graph TD
     A[Início] --> B[Verificar Partição Root A (p2)]
     B --> C{Partição Root A ok?}
@@ -62,6 +63,7 @@ graph TD
 
     classDef start_end fill:#f9f,stroke:#333,stroke-width:2px;
     class A,D,G,H start_end;
+```
 
 ### Resolução de Problemas
 
